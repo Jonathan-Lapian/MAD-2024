@@ -1,10 +1,30 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {Button} from '../../atoms';
 
-const Header = ({text, left = 24}) => {
+const Header = ({
+  text,
+  backButton,
+  onPress,
+  size = 24,
+  font = 'Poppins-Medium',
+  headerKid,
+  kidText,
+  row = 'row',
+  top = 0,
+  bottom = 0,
+  profilePic,
+}) => {
   return (
-    <View style={styles.container(left)}>
-      <Text style={styles.text}> {text}</Text>
+    <View style={styles.container({row, top, bottom})}>
+      {backButton && (
+        <Button type="icon-only" icon="arrow-back" onPress={onPress} />
+      )}
+      {profilePic && (
+        <Button style={styles.profile} type="profile" onPress={onPress} />
+      )}
+      <Text style={styles.text({size, font})}>{text}</Text>
+      {headerKid ? <Text style={styles.headerKidText}>{kidText}</Text> : null}
     </View>
   );
 };
@@ -12,13 +32,19 @@ const Header = ({text, left = 24}) => {
 export default Header;
 
 const styles = StyleSheet.create({
-  container: left => ({
+  container: ({row, top, bottom}) => ({
     backgroundColor: '#FFFFFF',
-    paddingLeft: left,
-    paddingVertical: 38,
+    paddingLeft: 24,
+    paddingTop: top,
+    paddingBottom: bottom,
+    flexDirection: row,
   }),
-  text: {
-    fontFamily: 'Poppins-Medium',
-    fontSize: 22,
+  text: ({size, font}) => ({
+    fontFamily: font,
+    fontSize: size,
+  }),
+  headerKidText: {
+    fontFamily: 'Poppins-Light',
+    fontSize: 14,
   },
 });

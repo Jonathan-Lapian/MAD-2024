@@ -1,31 +1,41 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, Image} from 'react-native';
 import React from 'react';
 import {Header, TextInput} from '../../components/molecules';
 import {Button, Gap} from '../../components/atoms';
-import {Ellipse} from '../../assets/icon';
+import {NullPhoto} from '../../assets/icon';
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <View style={styles.container2}>
-        <Button text="<" color="white" textSize={40} />
-        <Header left={26} text="Sign Up" />
-      </View>
+      <Header
+        text="Sign Up"
+        backButton={true}
+        onPress={() => navigation.goBack()}
+        top={38}
+        bottom={37}
+      />
       <View style={styles.contentWrapper}>
-        <View style={styles.container3}>
-          <Ellipse />
+        <View style={styles.profileContainer}>
+          <View style={styles.profileBorder}>
+            <TouchableOpacity>
+              <Image source={NullPhoto} style={styles.photo} />
+            </TouchableOpacity>
+          </View>
         </View>
-        <Gap height={26} />
         <TextInput label="Full Name" placeholder="Type your full name" />
-        <Gap height={16} />
+        <Gap height={15} />
         <TextInput
           label="Email Address"
           placeholder="Type your email address"
         />
-        <Gap height={16} />
+        <Gap height={15} />
         <TextInput label="Password" placeholder="Type your password" />
         <Gap height={24} />
-        <Button text="Continue" />
+        <Button
+          text="Continue"
+          type="normal"
+          onPress={() => navigation.navigate('SignIn')}
+        />
       </View>
     </View>
   );
@@ -37,22 +47,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  container2: {
-    flexDirection: 'row',
-    flex: 0,
-    backgroundColor: '#FFFFFF',
-    paddingHorizontal: 24,
-  },
-  container3: {
-    backgroundColor: '#FFFFFF',
+  profileContainer: {
     alignItems: 'center',
+    marginTop: 24,
+  },
+  profileBorder: {
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: '#8D92A3',
+    height: 110,
+    width: 110,
+    borderRadius: 110 / 2,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   contentWrapper: {
     marginTop: 24,
-    flex: 1,
     backgroundColor: '#FFFFFF',
+    flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 25,
+  },
+  photo: {
+    height: 90,
+    width: 90,
   },
 });

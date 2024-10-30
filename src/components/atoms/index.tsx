@@ -1,4 +1,4 @@
 import Button from './Button';
 import Gap from './Gap';
-
-export {Button, Gap};
+import Sub from './subTitle';
+export {Button, Gap, Sub};
