@@ -3,10 +3,9 @@ import SplashScreen from './src/pages/SplashScreen';
 import SignIn from './src/pages/SignInScreen';
 import SignUp from './src/pages/SignUpScreen';
 import Home from './src/pages/HomeScreen';
+import AddTransaction from './src/pages/AddTransaction';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import CashHand from './src/pages/CashHand';
-import CashBank from './src/pages/CashBank';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,13 +34,8 @@ const App = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="CashHand"
-          component={CashHand}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="CashBank"
-          component={CashBank}
+          name="AddTransaction"
+          component={AddTransaction}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

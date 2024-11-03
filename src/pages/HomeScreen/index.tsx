@@ -41,17 +41,22 @@ const Home = ({navigation}) => {
       <View style={styles.transWrap}>
         <Gap height={10.6} />
         <Sub text="Add Transaction" font="Poppins-Medium" />
-        <Gap height={8.81} />
-        <Button
-          text="Cash On Hand"
-          type="normal"
-          onPress={() => navigation.navigate('CashHand')}
-        />
+
         <Gap height={18.04} />
         <Button
-          text="Cash On Bank"
           type="normal"
-          onPress={() => navigation.navigate('CashBank')}
+          text="Cash On Hand"
+          onPress={() =>
+            navigation.navigate('AddTransaction', {title: 'Cash On Hand'})
+          }
+        />
+        <Gap height={10} />
+        <Button
+          type="normal"
+          text="Cash On Bank"
+          onPress={() =>
+            navigation.navigate('AddTransaction', {title: 'Cash On Bank'})
+          }
         />
       </View>
     </View>
