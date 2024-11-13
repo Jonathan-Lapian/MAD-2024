@@ -14,6 +14,7 @@ const Header = ({
   top = 0,
   bottom = 0,
   profilePic,
+  source,
 }) => {
   return (
     <View style={styles.container({row, top, bottom})}>
@@ -21,7 +22,12 @@ const Header = ({
         <Button type="icon-only" icon="arrow-back" onPress={onPress} />
       )}
       {profilePic && (
-        <Button style={styles.profile} type="profile" onPress={onPress} />
+        <Button
+          style={styles.profile}
+          type="profile"
+          onPress={onPress}
+          Source={source}
+        />
       )}
       <Text style={styles.text({size, font})}>{text}</Text>
       {headerKid ? <Text style={styles.headerKidText}>{kidText}</Text> : null}

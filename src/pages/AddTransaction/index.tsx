@@ -1,10 +1,37 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Gap} from '../../components/atoms';
 import {Header, TransactionCard, TextInput} from '../../components/molecules';
+import {getDatabase, ref, push, set} from 'firebase/database';
+import moment from 'moment';
+import {showMessage} from 'react-native-flash-message';
 
 const AddTransaction = ({navigation, route}) => {
-  const {title} = route.params;
+  const {title, uid} = route.params;
+
+  const [description, setDescription] = useState('');
+  const [type, setType] = useState('');
+  const [amount, setAmount] = useState('');
+
+  const onSave = () => {
+    const db = getDatabase();
+    const transactionRef = ref(db, `transactions/${uid}`);
+    const newTransactionRef = push(transactionRef);
+    set(newTransactionRef, {
+      date: moment().format('LLL'),
+      description: description,
+      type: type,
+      amount: amount,
+      category: title,
+    });
+
+    showMessage({
+      message: 'Transaksi berhasil disimpan',
+      type: 'success',
+    });
+
+    navigation.navigate('Home', {uid: uid});
+  };
   return (
     <ScrollView
       style={styles.pageContainer}
@@ -17,11 +44,26 @@ const AddTransaction = ({navigation, route}) => {
         onPress={() => navigation.goBack()}
       />
       <View style={styles.contentWrapper}>
-        <TextInput label="Description" placeholder="Add the description" />
+        <TextInput
+          label="Description"
+          placeholder="Add the description"
+          onChangeText={value => setDescription(value)}
+        />
         <Gap height={17} />
-        <TextInput label="Type" placeholder="Debit / Kredit" />
+        <TextInput
+          label="Type"
+          placeholder="Expense / Income"
+          onChangeText={value => setType(value)}
+        />
         <Gap height={17} />
-        <Button text="Save" />
+        <TextInput
+          label="Amount"
+          placeholder="Amount"
+          onChangeText={value => setAmount(value)}
+        />
+
+        <Gap height={17} />
+        <Button text="Save" onPress={onSave} />
         <Gap height={17} />
         <Text style={styles.subTitle}>Last 3 Transactions</Text>
         <TransactionCard

@@ -9,6 +9,7 @@ const Button = ({
   type,
   icon,
   onPress,
+  Source,
 }) => {
   if (type === 'icon-only') {
     if (icon === 'arrow-back') {
@@ -41,7 +42,7 @@ const Button = ({
         style={styles.profileButton}
         activeOpacity={0.5}
         onPress={onPress}>
-        <Image style={styles.profile} source={NullSquare} />
+        <Image style={styles.profile} source={Source} />
       </TouchableOpacity>
     );
   }
